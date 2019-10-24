@@ -12,10 +12,12 @@ function loadFromFile(string $filepath): ?array {
     }
 
     $array = json_decode($contenuFichierJson, true);
+    // convertit un string json en variable PHP
     if ($array === null) {
         return null;
     }
-    return $array; // print array
+
+    return $array; // renvoie l'array convertie en PHP
 }
 
 /**
@@ -46,6 +48,7 @@ function set(array &$grid, int $rowIndex, int $columnIndex, int $value): void {
 function row(array $grid, int $rowIndex): array {
     foreach ($grid[$rowIndex] as $case){
         $returnRow[] =  $case;
+        // récupère la nème ligne
     }
     return $returnRow;
 }
@@ -59,6 +62,7 @@ function column(array $grid, int $columnIndex): array {
     //
     foreach ($grid as $ligne){
         $returnColumn[] =  $ligne[$columnIndex];
+        // récupère chaque nème valeur de chaque ligne
     }
     return $returnColumn;
 }
@@ -76,6 +80,7 @@ function square(array $grid, int $squareIndex): array {
             for ($ligne = 0;$ligne < 3; $ligne++) {
                 for ($colonne = 0;$colonne < 3; $colonne++) {
                     $returnSquare[] =  $grid[$ligne][$colonne];
+                    // ajoute à l'array la case du carré
                 }
             }
             return $returnSquare;
@@ -301,8 +306,6 @@ function solve(array $grid, int $rowIndex = 0, int $columnIndex = 0,int $squareI
             return $grid;
         }
     } while (true);
-
-
 
 }
 
