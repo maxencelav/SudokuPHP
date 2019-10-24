@@ -197,17 +197,35 @@ function isValueValidForPosition(array $grid, int $rowIndex, int $columnIndex, i
  */
 
 function getNextRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
-    if($columnIndex == 9){
-        $tab = [$rowIndex + 1 , 1] ;
+    if (($rowIndex == 8) && ($columnIndex == 8)){
+        return [0,0];
     }
-    else {$tab = [$rowIndex , $columnIndex + 1 ] ;}
-    return $tab ;
+    else if($columnIndex == 8){
+        return [$rowIndex + 1 , 1];
+    }
+    else {
+        return [$rowIndex , $columnIndex + 1 ] ;
+    }
  }
 
-/**
+ function getPreviousRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
+    if (($rowIndex == 0) && ($columnIndex == 0)){
+        return [8,8];
+    }
+    else if($columnIndex == 0){
+        return [$rowIndex - 1 , 8];
+    }
+    else {
+        return [$rowIndex , $columnIndex - 1 ] ;
+    }
+ }
+
+
+ /**
  * Teste si la grille est valide
  * @return bool
  */
+
 function isValid(array $grid): bool {
     //
     for ($index = 0; $index < 9; $index++) {
@@ -219,9 +237,72 @@ function isValid(array $grid): bool {
 }
 
 function solve(array $grid, int $rowIndex = 0, int $columnIndex = 0,int $squareIndex = 0): ?array {
-    //
-    //echo isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,8);
-    echo isValid($grid);
+    $value = 0;
+    $columnIndex = 0;
+    do {
+
+        settype($rowIndex, "integer");
+        settype($columnIndex, "integer");
+        settype($squareIndex, "integer");
+        // Sinon les 0 sont considérés comme null
+
+        $contenuCase = get($grid,$rowIndex,$columnIndex);
+        echo $rowIndex.$columnIndex.":".$contenuCase.PHP_EOL;
+
+        // Si la case est vide
+        if ($contenuCase == 0){
+            if (isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,$value)){
+                set($grid,$rowIndex,$columnIndex,$value);
+
+                if ($value == 10) { $value = 1;}
+                else {$value++;}
+            }
+            else {
+                $testCase = false;
+                for ( $i = 1 ; $i < 10 ; $i++ ){
+                    if (isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,$i)){
+                        $testCase = true;
+                    }
+                }
+
+                if ($testCase == false){
+                    // on augemente la valeur de la case précédente de 1
+                    $valeurCasePrecedente = get($grid,$casePrecedente[0],$casePrecedente[1]);
+                    $tableauValeursPossibles = [];
+
+                    for ( $i = 1 ; $i < 10 ; $i++ ){
+                        if (isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,$i)){
+                            $tableauValeursPossibles[] =  $i;
+                        }
+                    }
+
+                    foreach ($tableauValeursPossibles as $valeurPossible) {
+                        if ($valeurPossible > $valeurCasePrecedente){
+                            set($grid,$casePrecedente[0],$casePrecedente[1],$valeurPossible);
+                            break 2;
+                        }
+                    }
+
+                }
+            }
+            // else if dans le cas ou aucun truc correspond
+        }
+
+        $prochaineCase = getNextRowColumn($grid,$rowIndex,$columnIndex);
+        echo "procase";
+        print_r($prochaineCase);
+        echo PHP_EOL;
+        $rowIndex = $prochaineCase[0];
+        $columnIndex = $prochaineCase[1];
+
+        $casePrecedente = [$rowIndex,$columnIndex];
+
+        if (isValid($grid)){
+            return $grid;
+        }
+    } while (true);
+
+
 
 }
 
@@ -235,7 +316,7 @@ foreach($files as $file){
     echo(display($grid) . PHP_EOL);
     $startTime = microtime(true);
     echo("Début de la recherche de solution" . PHP_EOL);
-    $solvedGrid = solve($grid);
+    $solvedGrid = solve($grid, 0, 0);
     if($solvedGrid === null){
         echo("Echec, grille insolvable" . PHP_EOL);
     } else {
