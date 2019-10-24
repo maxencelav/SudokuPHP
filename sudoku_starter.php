@@ -6,13 +6,11 @@
  * @return array|null Un tableau si le fichier existe et est valide, null sinon
  */
 function loadFromFile(string $filepath): ?array {
-    // Get the contents of the JSON file
     $contenuFichierJson = file_get_contents($filepath);
     if ($contenuFichierJson === false) {
         return null;
     }
 
-    // Convert to array
     $array = json_decode($contenuFichierJson, true);
     if ($array === null) {
         return null;
