@@ -46,7 +46,10 @@ function set(array $grid, int $rowIndex, int $columnIndex, int $value): void {
  * @return array Chiffres de la ligne demandée
  */
 function row(array $grid, int $rowIndex): array {
-    //
+    foreach ($grid[$rowIndex] as $case){
+        $returnRow[] =  $case;
+    }
+    return $returnRow;
 }
 
 /**
@@ -74,12 +77,16 @@ function square(array $grid, int $squareIndex): array {
  */
 function display(array $grid): string {
     //
+    $string =  "";
     foreach ($grid as $ligne){
         foreach ($ligne as $case){
-            echo $case . " ";
+            $string .= $case;
+            $string .= " ";
         }
-        echo  PHP_EOL;
+        $string .= PHP_EOL;
     }
+
+    return $string;
 }
 
 /**
@@ -124,6 +131,9 @@ foreach($files as $file){
     echo("Chargement du fichier $file" . PHP_EOL);
     $grid = loadFromFile($filepath);
     echo(display($grid) . PHP_EOL);
+
+    row($grid,0);
+
     $startTime = microtime(true);
     echo("Début de la recherche de solution" . PHP_EOL);
     $solvedGrid = solve($grid);
