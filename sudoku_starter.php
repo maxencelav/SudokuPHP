@@ -210,11 +210,18 @@ function getNextRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
  */
 function isValid(array $grid): bool {
     //
+    for ($index = 0; $index < 9; $index++) {
+        if(count(array_unique(row($grid,$index))) !=9 or count(array_unique(column($grid,$index))) !=9 or count(array_unique(square($grid,$index))) !=9 ){
+            return false;
+        }
+    }
+    return true;
 }
 
 function solve(array $grid, int $rowIndex = 0, int $columnIndex = 0,int $squareIndex = 0): ?array {
     //
-    echo isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,8);
+    //echo isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,8);
+    echo isValid($grid);
 
 }
 
