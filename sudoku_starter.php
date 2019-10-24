@@ -76,7 +76,7 @@ function square(array $grid, int $squareIndex): array {
  * @return string
  */
 function display(array $grid): string {
-    //
+
     $string =  "";
     foreach ($grid as $ligne){
         foreach ($ligne as $case){
@@ -131,9 +131,6 @@ foreach($files as $file){
     echo("Chargement du fichier $file" . PHP_EOL);
     $grid = loadFromFile($filepath);
     echo(display($grid) . PHP_EOL);
-
-    row($grid,0);
-
     $startTime = microtime(true);
     echo("Début de la recherche de solution" . PHP_EOL);
     $solvedGrid = solve($grid);
