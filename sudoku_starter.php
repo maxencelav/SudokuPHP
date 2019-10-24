@@ -59,6 +59,10 @@ function row(array $grid, int $rowIndex): array {
  */
 function column(array $grid, int $columnIndex): array {
     //
+    foreach ($grid as $case){
+        $returnRow[] =  $case[$columnIndex];
+    }
+    return $returnRow;
 }
 
 /**
@@ -131,6 +135,8 @@ foreach($files as $file){
     echo("Chargement du fichier $file" . PHP_EOL);
     $grid = loadFromFile($filepath);
     echo(display($grid) . PHP_EOL);
+    print_r(column($grid,0));
+
     $startTime = microtime(true);
     echo("Début de la recherche de solution" . PHP_EOL);
     $solvedGrid = solve($grid);
