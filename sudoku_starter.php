@@ -197,9 +197,14 @@ function isValueValidForPosition(array $grid, int $rowIndex, int $columnIndex, i
  * @param int $columnIndex Index de colonne
  * @return array Coordonnées suivantes au format [indexLigne, indexColonne]
  */
+
 function getNextRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
-    //
-}
+    if($columnIndex == 9){
+        $tab = [$rowIndex + 1 , 1] ;
+    }
+    else {$tab = [$rowIndex , $columnIndex + 1 ] ;}
+    return $tab ;
+ }
 
 /**
  * Teste si la grille est valide
