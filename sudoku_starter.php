@@ -75,73 +75,73 @@ function square(array $grid, int $squareIndex): array {
     //
     switch($squareIndex){
         case 0:
-            for ($x = 0;$x < 3; $x++) {
-                for ($y = 0;$y < 3; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 0;$ligne < 3; $ligne++) {
+                for ($colonne = 0;$colonne < 3; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 1:
-            for ($x = 0;$x < 3; $x++) {
-                for ($y = 3;$y < 6; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 0;$ligne < 3; $ligne++) {
+                for ($colonne = 3;$colonne < 6; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 2:
-            for ($x = 0;$x < 3; $x++) {
-                for ($y = 6;$y < 9; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 0;$ligne < 3; $ligne++) {
+                for ($colonne = 6;$colonne < 9; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 3:
-            for ($x = 3;$x < 6; $x++) {
-                for ($y = 0;$y < 3; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 3;$ligne < 6; $ligne++) {
+                for ($colonne = 0;$colonne < 3; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 4:
-            for ($x = 3;$x < 6; $x++) {
-                for ($y = 3;$y < 6; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 3;$ligne < 6; $ligne++) {
+                for ($colonne = 3;$colonne < 6; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 5:
-            for ($x = 3;$x < 6; $x++) {
-                for ($y = 6;$y < 9; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 3;$ligne < 6; $ligne++) {
+                for ($colonne = 6;$colonne < 9; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 6:
-            for ($x = 6;$x < 9; $x++) {
-                for ($y = 0;$y < 3; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 6;$ligne < 9; $ligne++) {
+                for ($colonne = 0;$colonne < 3; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 7:
-            for ($x = 6;$x < 9; $x++) {
-                for ($y = 3;$y < 6; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 6;$ligne < 9; $ligne++) {
+                for ($colonne = 3;$colonne < 6; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
 
         case 8:
-            for ($x = 6;$x < 9; $x++) {
-                for ($y = 6;$y < 9; $y++) {
-                    $returnSquare[] =  $grid[$x][$y];
+            for ($ligne = 6;$ligne < 9; $ligne++) {
+                for ($colonne = 6;$colonne < 9; $colonne++) {
+                    $returnSquare[] =  $grid[$ligne][$colonne];
                 }
             }
             return $returnSquare;
@@ -176,8 +176,18 @@ function display(array $grid): string {
  * @param int $value Valeur
  * @return bool Résultat du test
  */
-function isValueValidForPosition(array $grid, int $rowIndex, int $columnIndex, int $value): bool {
+function isValueValidForPosition(array $grid, int $rowIndex, int $columnIndex, int $squareIndex,int $value): bool {
     //
+    $data = [row($grid,$rowIndex),column($grid,$columnIndex),square($grid,$squareIndex)];
+
+    foreach ($data as $listeNombres){
+        foreach ($listeNombres as $nombre){
+            if ($value == $nombre){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 /**
@@ -199,8 +209,10 @@ function isValid(array $grid): bool {
     //
 }
 
-function solve(array $grid, int $rowIndex, int $columnIndex): ?array {
+function solve(array $grid, int $rowIndex = 0, int $columnIndex = 0,int $squareIndex = 0): ?array {
     //
+    echo isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,8);
+
 }
 
 $dir = __DIR__ . '/grids';
