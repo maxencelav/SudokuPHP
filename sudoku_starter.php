@@ -27,7 +27,7 @@ function loadFromFile(string $filepath): ?array {
  * @return int Valeur
  */
 function get(array $grid, int $rowIndex, int $columnIndex): int {
-    //
+    return $grid[$rowIndex][$columnIndex] ; 
 }
 
 /**
@@ -36,8 +36,8 @@ function get(array $grid, int $rowIndex, int $columnIndex): int {
  * @param int $columnIndex Index de colonne
  * @param int $value Valeur
  */
-function set(array $grid, int $rowIndex, int $columnIndex, int $value): void {
-    //
+function set(array &$grid, int $rowIndex, int $columnIndex, int $value): void {
+    $grid[$rowIndex][$columnIndex] = $value ;
 }
 
 /**
@@ -60,9 +60,9 @@ function row(array $grid, int $rowIndex): array {
 function column(array $grid, int $columnIndex): array {
     //
     foreach ($grid as $ligne){
-        $returnRow[] =  $ligne[$columnIndex];
+        $returnColumn[] =  $ligne[$columnIndex];
     }
-    return $returnRow;
+    return $returnColumn;
 }
 
 /**
@@ -75,6 +75,44 @@ function square(array $grid, int $squareIndex): array {
     //
     switch($squareIndex){
         case 0:
+            for ($x = 0;$x < 3; $x++) {
+                for ($y = 0;$y < 3; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
+        case 1:
+            for ($x = 0;$x < 3; $x++) {
+                for ($y = 3;$y < 6; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
+        case 2:
+            for ($x = 0;$x < 3; $x++) {
+                for ($y = 6;$y < 9; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+        
+        case 3:
+            for ($x = 3;$x < 6; $x++) {
+                for ($y = 0;$y < 3; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
+        case 6:
+            for ($x = 6;$x < 9; $x++) {
+                for ($y = 0;$y < 3; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
 
         default:
             return [0,0,0,0,0,0,0,0,0,0];
@@ -141,7 +179,7 @@ foreach($files as $file){
     echo("Chargement du fichier $file" . PHP_EOL);
     $grid = loadFromFile($filepath);
     echo(display($grid) . PHP_EOL);
-    print_r(column($grid,0));
+    print_r(square($grid,1));
 
     $startTime = microtime(true);
     echo("Début de la recherche de solution" . PHP_EOL);
