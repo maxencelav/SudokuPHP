@@ -59,8 +59,8 @@ function row(array $grid, int $rowIndex): array {
  */
 function column(array $grid, int $columnIndex): array {
     //
-    foreach ($grid as $case){
-        $returnRow[] =  $case[$columnIndex];
+    foreach ($grid as $ligne){
+        $returnRow[] =  $ligne[$columnIndex];
     }
     return $returnRow;
 }
@@ -73,6 +73,12 @@ function column(array $grid, int $columnIndex): array {
  */
 function square(array $grid, int $squareIndex): array {
     //
+    switch($squareIndex){
+        case 0:
+
+        default:
+            return [0,0,0,0,0,0,0,0,0,0];
+    }
 }
 
 /**
