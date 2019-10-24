@@ -184,7 +184,9 @@ function isValueValidForPosition(array $grid, int $rowIndex, int $columnIndex, i
     $data = [row($grid,$rowIndex),column($grid,$columnIndex),square($grid,$squareIndex)];
 
     foreach ($data as $listeNombres){
+        // prend chaque liste (row, column, square)
         foreach ($listeNombres as $nombre){
+            // récupère chaque nombre de la liste
             if ($value == $nombre){
                 return false;
             }
@@ -203,9 +205,11 @@ function isValueValidForPosition(array $grid, int $rowIndex, int $columnIndex, i
 
 function getNextRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
     if (($rowIndex == 8) && ($columnIndex == 8)){
+        // Si on est à la toute dernière case
         return [0,0];
     }
     else if($columnIndex == 8){
+        //Si on est à la dernière case d'une ligne
         return [$rowIndex + 1 , 1];
     }
     else {
@@ -215,9 +219,11 @@ function getNextRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
 
  function getPreviousRowColumn(array $grid, int $rowIndex, int $columnIndex): array {
     if (($rowIndex == 0) && ($columnIndex == 0)){
+        // Si on est à la toute première case
         return [8,8];
     }
     else if($columnIndex == 0){
+        // Si on est à la première case d'une ligne
         return [$rowIndex - 1 , 8];
     }
     else {
@@ -235,6 +241,7 @@ function isValid(array $grid): bool {
     //
     for ($index = 0; $index < 9; $index++) {
         if(count(array_unique(row($grid,$index))) !=9 or count(array_unique(column($grid,$index))) !=9 or count(array_unique(square($grid,$index))) !=9 ){
+            // Si toutes les valeurs d'une ligne, case, ou carré ne sont pas uniques...
             return false;
         }
     }
@@ -262,7 +269,9 @@ function solve(array $grid, int $rowIndex = 0, int $columnIndex = 0,int $squareI
                 if ($value == 10) { $value = 1;}
                 else {$value++;}
             }
+            // Si on peut pas mettre le nombre qu'on voulait dedans
             else {
+                // On teste si la case a au moins un cas possible
                 $testCase = false;
                 for ( $i = 1 ; $i < 10 ; $i++ ){
                     if (isValueValidForPosition($grid,$rowIndex,$columnIndex,$squareIndex,$i)){
@@ -290,13 +299,12 @@ function solve(array $grid, int $rowIndex = 0, int $columnIndex = 0,int $squareI
 
                 }
             }
-            // else if dans le cas ou aucun truc correspond
         }
 
         $prochaineCase = getNextRowColumn($grid,$rowIndex,$columnIndex);
-        echo "procase";
-        print_r($prochaineCase);
-        echo PHP_EOL;
+        //echo "procase";
+        //print_r($prochaineCase);
+        //echo PHP_EOL;
         $rowIndex = $prochaineCase[0];
         $columnIndex = $prochaineCase[1];
 
