@@ -27,7 +27,7 @@ function loadFromFile(string $filepath): ?array {
  * @return int Valeur
  */
 function get(array $grid, int $rowIndex, int $columnIndex): int {
-    return $grid[$rowIndex][$columnIndex] ; 
+    return $grid[$rowIndex][$columnIndex];
 }
 
 /**
@@ -37,7 +37,7 @@ function get(array $grid, int $rowIndex, int $columnIndex): int {
  * @param int $value Valeur
  */
 function set(array &$grid, int $rowIndex, int $columnIndex, int $value): void {
-    $grid[$rowIndex][$columnIndex] = $value ;
+    $grid[$rowIndex][$columnIndex] = $value;
 }
 
 /**
@@ -97,7 +97,7 @@ function square(array $grid, int $squareIndex): array {
                 }
             }
             return $returnSquare;
-        
+
         case 3:
             for ($x = 3;$x < 6; $x++) {
                 for ($y = 0;$y < 3; $y++) {
@@ -179,6 +179,7 @@ foreach($files as $file){
     echo("Chargement du fichier $file" . PHP_EOL);
     $grid = loadFromFile($filepath);
     echo(display($grid) . PHP_EOL);
+
     print_r(square($grid,1));
 
     $startTime = microtime(true);
