@@ -74,7 +74,12 @@ function square(array $grid, int $squareIndex): array {
  */
 function display(array $grid): string {
     //
-    print_r($grid);
+    foreach ($grid as $ligne){
+        foreach ($ligne as $case){
+            echo $case . " ";
+        }
+        echo  PHP_EOL;
+    }
 }
 
 /**
