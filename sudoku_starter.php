@@ -106,9 +106,41 @@ function square(array $grid, int $squareIndex): array {
             }
             return $returnSquare;
 
+        case 4:
+            for ($x = 3;$x < 6; $x++) {
+                for ($y = 3;$y < 6; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
+        case 5:
+            for ($x = 3;$x < 6; $x++) {
+                for ($y = 6;$y < 9; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
         case 6:
             for ($x = 6;$x < 9; $x++) {
                 for ($y = 0;$y < 3; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
+        case 7:
+            for ($x = 6;$x < 9; $x++) {
+                for ($y = 3;$y < 6; $y++) {
+                    $returnSquare[] =  $grid[$x][$y];
+                }
+            }
+            return $returnSquare;
+
+        case 8:
+            for ($x = 6;$x < 9; $x++) {
+                for ($y = 6;$y < 9; $y++) {
                     $returnSquare[] =  $grid[$x][$y];
                 }
             }
@@ -179,9 +211,6 @@ foreach($files as $file){
     echo("Chargement du fichier $file" . PHP_EOL);
     $grid = loadFromFile($filepath);
     echo(display($grid) . PHP_EOL);
-
-    print_r(square($grid,1));
-
     $startTime = microtime(true);
     echo("Début de la recherche de solution" . PHP_EOL);
     $solvedGrid = solve($grid);
